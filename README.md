@@ -1,2 +1,2 @@
-# almost-hardcore
-Minecraft mod for fabric-api giving players a hardcore game experience with a limited number of lives.
+# almost-hardcore: Please switch to branch named "master" for latest.
+
