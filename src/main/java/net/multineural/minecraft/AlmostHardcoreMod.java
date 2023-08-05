@@ -45,7 +45,6 @@ public class AlmostHardcoreMod implements ModInitializer {
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE, 800, 0));
                     player.getWorld().sendEntityStatus(player, (byte) 35);
 
-
                     return 0;
                 })));
     }
