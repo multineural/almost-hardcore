@@ -3,7 +3,7 @@
 	"id": "almost-hardcore",
 	"version": "${version}",
 	"name": "Almost-hardcore mod",
-	"description": "Minecraft mod for fabric-api giving players a hardcore game experience with a limited number of lives.",
+	"description": "Minecraft mod for fabric giving players a hardcore game experience with a limited number of lives.",
 	"authors": [
 		"Jim and Matthew Effinger"
 	],
@@ -12,7 +12,7 @@
 		"sources": "https://github.com/multineural/almost-hardcore"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/almost-hardcore/icon.png",
+	"icon": "assets/modid/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "net.multineural.minecraft",
+	"package": "net.multineural.minecraft.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"AlmostHardcoreClientMixin"
+		"ExampleMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
