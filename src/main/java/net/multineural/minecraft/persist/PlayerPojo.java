@@ -11,4 +11,5 @@ public class PlayerPojo {
     public void setNumLives(int numLives) {
         this.numLives = numLives;
     }
+
 }

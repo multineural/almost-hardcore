@@ -45,7 +45,7 @@ public class AlmostHardcoreMod implements ModInitializer {
 
     private void registerPlayersJoining() {
 
-        LOGGER.info(">>>> registerPlayersJoining method...");
+        LOGGER.debug(">>>> registerPlayersJoining method...");
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
 
@@ -109,7 +109,12 @@ public class AlmostHardcoreMod implements ModInitializer {
                     ServerPersistentState serverPersistentState =
                             ServerPersistentState.getOrCreate(context.getSource().getPlayer().getServer());
                     int lives = serverPersistentState.getNumLives(player.getUuid());
-                    player.sendMessage(Text.of(String.format("You have %s lives left ", lives)));
+
+                    String text = "lives";
+                    if(lives == 1) {
+                        text = "life";
+                    }
+                    player.sendMessage(Text.of(String.format("You have %s %s left ", lives, text)));
 
                     return 1; // this is the callback status, not the numLives
 

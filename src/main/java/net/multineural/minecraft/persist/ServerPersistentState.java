@@ -27,13 +27,12 @@ public class ServerPersistentState extends PersistentState {
     @Override
     public NbtCompound writeNbt(NbtCompound nbt) {
 
-        AlmostHardcoreMod.LOGGER.info(">>>> writeNbt method...");
+        AlmostHardcoreMod.LOGGER.debug(">>>> writeNbt method...");
 
         NbtCompound playersNbtCompound = new NbtCompound();
         players.forEach((UUID, playerSate) -> {
             NbtCompound playerStateNbt = new NbtCompound();
 
-            // ANYTIME YOU PUT NEW DATA IN THE PlayerState CLASS YOU NEED TO REFLECT THAT HERE!!!
             playerStateNbt.putInt(PROP_NAME_NUMLIVES, playerSate.getNumLives());
 
             playersNbtCompound.put(String.valueOf(UUID), playerStateNbt);
@@ -46,11 +45,11 @@ public class ServerPersistentState extends PersistentState {
 
     public int getNumLives(UUID playerId) {
 
-        AlmostHardcoreMod.LOGGER.info(">>>> getNumLives method, playerId=" + playerId);
+        AlmostHardcoreMod.LOGGER.debug(">>>> getNumLives method, playerId=" + playerId);
 
         PlayerPojo pojo = players.get(playerId);
-        if(pojo == null) {
-            AlmostHardcoreMod.LOGGER.info(">>>> PLAYER POJO IS NULL!!");
+        if (pojo == null) {
+            AlmostHardcoreMod.LOGGER.debug(">>>> PLAYER POJO IS NULL!!");
         }
 
         int retval = pojo.getNumLives();
@@ -61,7 +60,7 @@ public class ServerPersistentState extends PersistentState {
 
     public void setNumLives(UUID playerId, int numLives) {
 
-        AlmostHardcoreMod.LOGGER.info(">>>> setNumLives method...");
+        AlmostHardcoreMod.LOGGER.debug(">>>> setNumLives method...");
 
         players.get(playerId).setNumLives(numLives);
         markDirty();
@@ -72,7 +71,7 @@ public class ServerPersistentState extends PersistentState {
 
     public static ServerPersistentState createFromNbt(NbtCompound tag) {
 
-        AlmostHardcoreMod.LOGGER.info(">>>> createFromNbt method...");
+        AlmostHardcoreMod.LOGGER.debug(">>>> createFromNbt method...");
         ServerPersistentState serverPersistentState = new ServerPersistentState();
         NbtCompound playersNbt = tag.getCompound(PROP_NAME_PLAYERS_NBT);
 
@@ -81,7 +80,6 @@ public class ServerPersistentState extends PersistentState {
             UUID uuid = UUID.fromString(key);
 
             playerPojo.setNumLives(playersNbt.getCompound(key).getInt(PROP_NAME_NUMLIVES));
-            AlmostHardcoreMod.LOGGER.info(">>>> updated number of lives for uuid: " + uuid.toString());
             serverPersistentState.players.put(uuid, playerPojo);
         });
 
@@ -91,7 +89,7 @@ public class ServerPersistentState extends PersistentState {
 
     public static ServerPersistentState getOrCreate(MinecraftServer server) {
 
-        AlmostHardcoreMod.LOGGER.info(">>>> getOrCreate method...");
+        AlmostHardcoreMod.LOGGER.debug(">>>> getOrCreate method...");
 
         // First we get the persistentStateManager for the OVERWORLD
         PersistentStateManager persistentStateManager =
@@ -108,7 +106,7 @@ public class ServerPersistentState extends PersistentState {
 
     public static PlayerPojo getPlayerPojo(LivingEntity player) {
 
-        AlmostHardcoreMod.LOGGER.info(">>>> getPlayerPojo method...");
+        AlmostHardcoreMod.LOGGER.debug(">>>> getPlayerPojo method...");
 
         ServerPersistentState serverPersistentState = getOrCreate(player.getWorld().getServer());
 
