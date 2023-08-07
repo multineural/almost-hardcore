@@ -6,7 +6,9 @@ Minecraft mod for fabric (requires fabric-api) giving players a hardcore game ex
 2. Add starting and max lives configurations
 3. Add /ahc.gift command
 4. Add beacon/potion effect whereby the same old totem of undying effect is applied to any player in the beacon range.
-5. 
+
+## Seeds we used while testing:
+-1775059127233915075
 
 
 
