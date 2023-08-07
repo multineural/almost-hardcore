@@ -1,7 +1,6 @@
 package net.multineural.minecraft;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -14,7 +13,6 @@ import net.multineural.minecraft.persist.ServerPersistentState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class AlmostHardcoreMod implements ModInitializer {
@@ -29,7 +27,7 @@ public class AlmostHardcoreMod implements ModInitializer {
     public void onInitialize() {
 
         // requires a log4j.xml in the resources folder
-        System.setProperty("log4j.configurationFile", "log4j.xml");
+        // System.setProperty("log4j.configurationFile", "log4j.xml");
 
         // This code runs as soon as Minecraft is in a mod-load-ready state.
         // However, some things (like resources) may still be uninitialized.
@@ -55,7 +53,7 @@ public class AlmostHardcoreMod implements ModInitializer {
             ServerPersistentState serverState =
                     ServerPersistentState.getOrCreate(localPlayer.getWorld().getServer());
 
-            if(!serverState.getPlayers().containsKey(localPlayer.getUuid())) {
+            if (!serverState.getPlayers().containsKey(localPlayer.getUuid())) {
                 serverState.getPlayers().put(localPlayer.getUuid(), new PlayerPojo());
             }
 
@@ -65,11 +63,13 @@ public class AlmostHardcoreMod implements ModInitializer {
 
 
     private void registerCommands() {
+
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             registerTotemCommand(dispatcher);
             registerLivesCommand(dispatcher);
             //registerCHANGEMECommand(dispatcher);
         });
+
     }
 
 
@@ -99,6 +99,7 @@ public class AlmostHardcoreMod implements ModInitializer {
 
 
     private void registerLivesCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
+
         //// ahc.lives: queries the number of lives remaining
         dispatcher.register(literal("livesRemaining")
                 .executes(context -> {
@@ -111,7 +112,7 @@ public class AlmostHardcoreMod implements ModInitializer {
                     int lives = serverPersistentState.getNumLives(player.getUuid());
 
                     String text = "lives";
-                    if(lives == 1) {
+                    if (lives == 1) {
                         text = "life";
                     }
                     player.sendMessage(Text.of(String.format("You have %s %s left ", lives, text)));
